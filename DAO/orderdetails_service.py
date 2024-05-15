@@ -1,7 +1,7 @@
 from Util.DBconn import DBConnection
 from abc import ABC, abstractmethod
 
-class OrderDetails(DBConnection):
+class OrderDetailsService(DBConnection):
 
     def CalculateSubtotal(self,OrderID):
         try:

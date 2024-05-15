@@ -1,7 +1,7 @@
 from Util.DBconn import DBConnection
 from abc import ABC, abstractmethod
 
-class Orders(DBConnection):
+class OrdersService(DBConnection):
     def CalculateTotalAmount(self,OrderID):
         try:
             self.cursor.execute("""

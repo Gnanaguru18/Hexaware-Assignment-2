@@ -1,7 +1,7 @@
 from Util.DBconn import DBConnection
 from abc import ABC, abstractmethod
 
-class Inventory(DBConnection):
+class InventoryService(DBConnection):
     def GetProduct(self,InventoryID):
         try:
             self.cursor.execute("""
