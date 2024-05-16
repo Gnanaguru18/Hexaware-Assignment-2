@@ -9,6 +9,9 @@ class OrdersService(DBConnection):
             where OrderID=?
             """,OrderID
             )
+            orders = self.cursor.fetchall()  # Get all data
+            for order in orders:
+                print(order)            
         except Exception as e:
             print(e)
 
@@ -18,6 +21,9 @@ class OrdersService(DBConnection):
             select ProductID,Quantity from OrderDetails
             where OrderID=?""",OrderID
             )
+            orders = self.cursor.fetchall()  # Get all data
+            for order in orders:
+                print(order)
         except Exception as e:
             print(e)
 
@@ -30,6 +36,7 @@ class OrdersService(DBConnection):
             (Status,OrderID) 
             )
             self.conn.commit()
+            print("Updated Status......")
         except Exception as e:
             print(e)
 
@@ -45,5 +52,6 @@ class OrdersService(DBConnection):
             where OrderID= @a""",OrderID
             )
             self.conn.commit()
+            print("Order Cancelled successfully....")
         except Exception as e:
             print(e)

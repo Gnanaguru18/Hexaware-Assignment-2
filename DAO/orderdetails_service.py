@@ -11,6 +11,9 @@ class OrderDetailsService(DBConnection):
             on p.ProductID=o.ProductID
             where OrderID= ?""",OrderID
             )
+            orders = self.cursor.fetchall()  # Get all data
+            for order in orders:
+                print(order)  
         except Exception as e:
             print(e)
         
@@ -22,6 +25,9 @@ class OrderDetailsService(DBConnection):
             o.OrderID=od.OrderID
             where OrderID= ? """,OrderID
             )
+            orders = self.cursor.fetchall()  # Get all data
+            for order in orders:
+                print(order)  
         except Exception as e:
             print(e)
     
@@ -40,18 +46,20 @@ class OrderDetailsService(DBConnection):
             (Quantity,OrderID,OrderID)
             )
             self.conn.commit()
+            print("Quantity updated.........")
         except Exception as e:
             print(e)
 
 
-    def AddDiscount(self,discount,OrderID):
+    def AddDiscount(self,OrderID,discount):
         try:
             self.cursor.execute("""
             update Orders
-            set TotalAmount=TotalAmount*(1-(?/100))
+            set TotalAmount-=TotalAmount*(1-(?/100))
             where OrderID=?""",
             (discount,OrderID)
             )
             self.conn.commit()
+            print("Discount applied.........")
         except Exception as e:
             print(e)

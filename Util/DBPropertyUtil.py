@@ -2,7 +2,7 @@ class PropertyUtil:
     @staticmethod
     def get_property_string():
         server_name = "TIGGER\SQLEXPRESS"
-        database_name = "HexawareMoviesDB"
+        database_name = "TechShop"
 
         conn_str = (
             f"Driver={{SQL Server}};"

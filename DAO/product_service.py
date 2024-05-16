@@ -9,17 +9,20 @@ class ProductService(DBConnection):
             select * from Products
             where ProductID=?""",ProductID
             )
+            products = self.cursor.fetchall()  # Get all data
+            for product in products:
+                print(product)
         except Exception as e:
             print(e)
             
-    def UpdateProductInfo(self,ProductID ,ProductName ,Description ,Price ,Categor):
+    def UpdateProductInfo(self,ProductID ,ProductName ,Description ,Price ,Category):
         try:
             self.cursor.execute("""
             update Products
             set ProductName= ? ,Description= ? ,Price= ? ,Category= ?
             where ProductID=?
             """,
-            (ProductName ,Description ,Price ,Categor,ProductID)
+            (ProductName ,Description ,Price ,Category,ProductID)
             )
             self.conn.commit()
         except Exception as e:
@@ -32,6 +35,12 @@ class ProductService(DBConnection):
             where ProductID=?
             """,ProductID
             )
+            product = self.cursor.fetchall()
+            quantity=[i for i in product] 
+            if quantity[0] == 0:
+                print("Not available")
+            else:
+                print("Available")
         except Exception as e:
             print(e)
 

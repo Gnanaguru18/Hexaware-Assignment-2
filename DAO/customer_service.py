@@ -2,7 +2,7 @@ from Util.DBconn import DBConnection
 from abc import ABC, abstractmethod
 
 class CustomerService(DBConnection):
-    def CalculateTotalOrder(self,customer_id):
+    def CalculateTotalOrders(self,customer_id):
         try:
             self.cursor.execute("""
             select count(OrderID) from Orders
@@ -10,16 +10,22 @@ class CustomerService(DBConnection):
             group by CustomerID""",
             (customer_id)
             )
+            products = self.cursor.fetchall()  # Get all data
+            for product in products:
+                print(product)            
         except Exception as e:
             print(e)
 
-    def GetCustomerDetails(self,CustomerID,FirstName ,LastName ,Email ,Phone ,Address):
+    def GetCustomerDetails(self,CustomerID):
         try:
             self.cursor.execute("""
-            insert into Customers values (?,?,?,?,?,?)""",
-            (CustomerID,FirstName ,LastName ,Email ,Phone ,Address)
+            select * from Customers
+            where CustomerID= ?  """,
+            CustomerID
             )
-            self.conn.commit()
+            products = self.cursor.fetchall()  # Get all data
+            for product in products:
+                print(product)
         except Exception as e:
             print(e)
 
