@@ -10,6 +10,9 @@ class InventoryService(DBConnection):
                             where InventoryID= ? )""",
             InventoryID
             )
+            orders = self.cursor.fetchall()    
+            for order in orders:
+                print(order)
         except Exception as e:
             print(e)
             
@@ -20,40 +23,43 @@ class InventoryService(DBConnection):
             where ProductID= ? """,
             ProductID
             )
+            orders = self.cursor.fetchall()    
+            for order in orders:
+                print(order)
         except Exception as e:
             print(e)
     
-    def AddToInventory(self,Quantity,ProductID):
+    def AddToInventory(self,Quantity,InventoryID):
         try:
             self.cursor.execute("""
             update Inventory
             set QuantityInStock=QuantityInStock + ?
-            where ProductID = ?""",
-            (Quantity,ProductID)
+            where InventoryID = ?""",
+            (Quantity,InventoryID)
             )
             self.conn.commit()
         except Exception as e:
             print(e)
 
-    def RemoveFromInventory(self,Quantity,ProductID):
+    def RemoveFromInventory(self,Quantity,InventoryID):
         try:
             self.cursor.execute("""
             update Inventory
             set QuantityInStock=QuantityInStock - ?
-            where ProductID = ?""",
-            (Quantity,ProductID)
+            where InventoryID = ?""",
+            (Quantity,InventoryID)
             )
             self.conn.commit()
         except Exception as e:
             print(e)
 
-    def UpdateStockQuantity(self,Quantity,ProductID):
+    def UpdateStockQuantity(self,Quantity,InventoryID):
         try:
             self.cursor.execute("""
             update Inventory
             set QuantityInStock= ?
-            where ProductID = ?""",
-            (Quantity,ProductID)
+            where InventoryID = ?""",
+            (Quantity,InventoryID)
             )
             self.conn.commit()
         except Exception as e:
@@ -82,6 +88,9 @@ class InventoryService(DBConnection):
             where InventoryID= ? """,
             (InventoryID)
             )
+            orders = self.cursor.fetchall()    
+            for order in orders:
+                print(order)
         except Exception as e:
             print(e)
 
@@ -94,6 +103,9 @@ class InventoryService(DBConnection):
             where QuantityInStock < ? """,
             Threshold
             )
+            orders = self.cursor.fetchall()    
+            for order in orders:
+                print(order)
         except Exception as e:
             print(e)
 
@@ -105,5 +117,8 @@ class InventoryService(DBConnection):
             on p.ProductID=i.ProductID
             where QuantityInStock = 0"""
             )
+            orders = self.cursor.fetchall()    
+            for order in orders:
+                print(order)
         except Exception as e:
             print(e)

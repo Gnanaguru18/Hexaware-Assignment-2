@@ -84,21 +84,33 @@ class MainMenu:
                 10. Exit""")
             choice=int(input("Enter choice:"))
             if choice==1:
-                self.inventory_service.GetProduct()
+                InventoryID=input("Enter Inventory ID:")
+                self.inventory_service.GetProduct(InventoryID)
             elif choice==2:
-                self.inventory_service.GetQuantityInStock()
+                InventoryID=input("Enter Inventory ID:")
+                self.inventory_service.GetQuantityInStock(InventoryID)
             elif choice==3:          
-                self.inventory_service.AddToInventory()
+                InventoryID=input("Enter Inventory ID:")
+                Quantity=int(input("Enter quantity:"))
+                self.inventory_service.AddToInventory(Quantity,InventoryID)
             elif choice==4:
-                self.inventory_service.RemoveFromInventory()
-            elif choice==5:          
-                self.inventory_service.UpdateStockQuantity()
+                InventoryID=input("Enter Inventory ID:")
+                Quantity=int(input("Enter quantity:"))
+                self.inventory_service.RemoveFromInventory(Quantity,InventoryID)
+            elif choice==5:   
+                InventoryID=input("Enter Inventory ID:")
+                Quantity=int(input("Enter quantity:"))       
+                self.inventory_service.UpdateStockQuantity(Quantity,InventoryID)
             elif choice==6:
-                self.inventory_service.IsProductAvailable()
-            elif choice==7:          
-                self.inventory_service.GetInventoryValue()
+                ProductID=input("Enter Product ID:")
+                Quantity=int(input("Enter quantity:")) 
+                self.inventory_service.IsProductAvailable(ProductID,Quantity)
+            elif choice==7:       
+                InventoryID=input("Enter Inventory ID:")   
+                self.inventory_service.GetInventoryValue(InventoryID)
             elif choice==8:
-                self.inventory_service.ListLowStockProducts()
+                Threshold=int(input("Enter Threshold value:"))
+                self.inventory_service.ListLowStockProducts(Threshold)
             elif choice==9:          
                 self.inventory_service.ListOutOfStockProducts()
             elif choice==10:
