@@ -1,4 +1,6 @@
 from DAO import CustomerService,InventoryService,OrderDetailsService,OrdersService,ProductService
+from MyExceptions.customer_exception import validate_email
+
 
 class MainMenu:
     customer_service=CustomerService()
@@ -24,14 +26,15 @@ class MainMenu:
 
             elif choice==2:
                 customer_id=input("Enter Customer ID:")
-                self.customer_service.GetCustomerDetails()
+                self.customer_service.GetCustomerDetails(customer_id)
 
             elif choice==3:          
                 customer_id=input("Enter Customer ID:")
-                self.customer_service.GetCustomerDetails()
+                self.customer_service.GetCustomerDetails(customer_id)
                 FirstName=input("Enter new FirstName:")
                 LastName=input("Enter new LastName:")
                 Email=input("Enter new Email:")
+                validate_email(Email)
                 Phone=input("Enter new Phone:")
                 Address=input("Enter new Address:")
                 self.customer_service.UpdateCustomerInfo(customer_id,FirstName ,LastName ,Email ,Phone ,Address)
