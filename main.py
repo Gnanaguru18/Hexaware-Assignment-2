@@ -34,7 +34,8 @@ class MainMenu:
                 FirstName=input("Enter new FirstName:")
                 LastName=input("Enter new LastName:")
                 Email=input("Enter new Email:")
-                validate_email(Email)
+                if validate_email(Email):
+                    continue
                 Phone=input("Enter new Phone:")
                 Address=input("Enter new Address:")
                 self.customer_service.UpdateCustomerInfo(customer_id,FirstName ,LastName ,Email ,Phone ,Address)

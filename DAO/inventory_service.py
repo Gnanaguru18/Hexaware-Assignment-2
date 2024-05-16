@@ -74,6 +74,7 @@ class InventoryService(DBConnection,IInventoryService):
             (Quantity,InventoryID)
             )
             self.conn.commit()
+            print(f"Added {Quantity} to inventory.........")
         except Exception as e:
             print(e)
 
@@ -98,6 +99,7 @@ class InventoryService(DBConnection,IInventoryService):
             (Quantity,InventoryID)
             )
             self.conn.commit()
+            print(f"Stock quantity updated.........")
         except Exception as e:
             print(e)
     
@@ -124,9 +126,8 @@ class InventoryService(DBConnection,IInventoryService):
             where InventoryID= ? """,
             (InventoryID)
             )
-            orders = self.cursor.fetchall()    
-            for order in orders:
-                print(order)
+            orders = self.cursor.fetchone()[0]    
+            print(orders)
         except Exception as e:
             print(e)
 

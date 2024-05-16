@@ -50,5 +50,6 @@ class CustomerService(DBConnection,ICustomerService):
             (FirstName ,LastName ,Email ,Phone ,Address,CustomerID)
             )
             self.conn.commit()
+            print("Customer details updated..........")
         except Exception as e:
             print(e)
