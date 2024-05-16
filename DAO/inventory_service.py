@@ -1,7 +1,43 @@
 from Util.DBconn import DBConnection
 from abc import ABC, abstractmethod
 
-class InventoryService(DBConnection):
+class IInventoryService(ABC):
+    @abstractmethod
+    def GetProduct(self,InventoryID):
+        pass
+
+    @abstractmethod
+    def GetQuantityInStock(self,ProductID):
+        pass
+
+    @abstractmethod
+    def AddToInventory(self,Quantity,InventoryID):
+        pass
+
+    @abstractmethod
+    def RemoveFromInventory(self,Quantity,InventoryID):
+        pass
+
+    @abstractmethod
+    def UpdateStockQuantity(self,Quantity,InventoryID):
+        pass
+
+    @abstractmethod
+    def IsProductAvailable(self,ProductID,Quantity):
+        pass
+
+    @abstractmethod
+    def GetInventoryValue(self,InventoryID):
+        pass
+
+    @abstractmethod
+    def ListLowStockProducts(self,Threshold):
+        pass
+
+    @abstractmethod
+    def ListOutOfStockProducts(self):
+        pass
+class InventoryService(DBConnection,IInventoryService):
     def GetProduct(self,InventoryID):
         try:
             self.cursor.execute("""

@@ -1,7 +1,19 @@
 from Util.DBconn import DBConnection
 from abc import ABC, abstractmethod
 
-class CustomerService(DBConnection):
+class ICustomerService(ABC):
+    @abstractmethod
+    def CalculateTotalOrders(self,customer_id):
+        pass
+
+    @abstractmethod
+    def GetCustomerDetails(self,CustomerID):
+        pass
+
+    @abstractmethod
+    def UpdateCustomerInfo(self,CustomerID,FirstName ,LastName ,Email ,Phone ,Address):
+        pass
+class CustomerService(DBConnection,ICustomerService):
     def CalculateTotalOrders(self,customer_id):
         try:
             self.cursor.execute("""
@@ -10,7 +22,7 @@ class CustomerService(DBConnection):
             group by CustomerID""",
             (customer_id)
             )
-            products = self.cursor.fetchall()  # Get all data
+            products = self.cursor.fetchall()  
             for product in products:
                 print(product)            
         except Exception as e:
@@ -23,7 +35,7 @@ class CustomerService(DBConnection):
             where CustomerID= ?  """,
             CustomerID
             )
-            products = self.cursor.fetchall()  # Get all data
+            products = self.cursor.fetchall()  
             for product in products:
                 print(product)
         except Exception as e:
