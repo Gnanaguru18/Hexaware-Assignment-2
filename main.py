@@ -13,11 +13,11 @@ class MainMenu:
     def customer_menu(self):
         while True:
             print("""
-                Choose 
+                Customer Menu
                 1: Calculate Total Orders
                 2: Get Customer Details
                 3. Update Customer Info
-                4. Exit""")
+                4. Back to main menu""")
             choice=int(input("Enter choice:"))
 
             if choice==1:
@@ -46,11 +46,11 @@ class MainMenu:
     def product_menu(self):
         while True:
             print("""
-                Choose 
+                Product Menu 
                 1: Get Product Details
                 2: Update Product Info
                 3. Is Product In Stock
-                4. Exit""")
+                4. Back to main menu""")
             choice=int(input("Enter choice:"))
             if choice==1:
                 ProductID=input("Enter Product ID:")
@@ -75,7 +75,7 @@ class MainMenu:
     def inventory_menu(self):
         while True:
             print("""
-                Choose 
+                Inventory Menu 
                 1: Get Product
                 2: Get Quantity In Stock
                 3. Add To Inventory
@@ -85,7 +85,7 @@ class MainMenu:
                 7. Get Inventory Value
                 8. List Low Stock Products
                 9. List Out Of Stock Products
-                10. Exit""")
+                10. Back to main menu""")
             choice=int(input("Enter choice:"))
             if choice==1:
                 InventoryID=input("Enter Inventory ID:")
@@ -123,12 +123,12 @@ class MainMenu:
     def orders_menu(self):
         while True:
             print("""
-                Choose 
+                Orders Menu 
                 1: CalculateTotalAmount
                 2: GetOrderDetails
                 3. UpdateOrderStatus
                 4. CancelOrder
-                5. Exit""")
+                5. Back to main menu""")
             choice=int(input("Enter choice:"))
             if choice==1:
                 OrderID=input("Enter Order ID")
@@ -149,12 +149,12 @@ class MainMenu:
     def orderdetails_menu(self):
         while True:
             print("""
-                Choose 
+                Orderdetails Menu 
                 1: CalculateSubtotal
                 2: GetOrderDetailInfo
                 3. UpdateQuantity
                 4. AddDiscount
-                5. Exit""")
+                5. Back to main menu""")
             choice=int(input("Enter choice:"))
             if choice==1:
                 OrderID=input("Enter Order ID")
@@ -176,7 +176,7 @@ class MainMenu:
 def main():
      while True:
             print("""
-                Choose 
+                Main Menu 
                 1: Customer Management
                 2: Product Management
                 3. Inventory Management
