@@ -63,7 +63,7 @@ class MainMenu:
                 Description=input("Enter new Description:")
                 Price=int(input("Enter new Price:"))
                 Category=int(input("Enter new Category:"))
-                self.product_service.UpdateProductInfo(ProductName ,Description ,Price ,Category)
+                self.product_service.UpdateProductInfo(ProductID,ProductName ,Description ,Price ,Category)
 
             elif choice==3:          
                 ProductID=input("Enter Product ID:")

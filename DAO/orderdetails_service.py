@@ -1,9 +1,18 @@
 from Util.DBconn import DBConnection
 from Interface import IOrderDetailsService
+from MyExceptions import InsufficientStockException,IncompleteOrderException
 class OrderDetailsService(DBConnection,IOrderDetailsService):
 
     def CalculateSubtotal(self,OrderID):
         try:
+            self.cursor.execute("""
+            select ProductID from OrderDetails
+            where OrderID = ? """,OrderID
+            )
+            product=self.cursor.fetchone()[0]
+            if not product:
+                raise IncompleteOrderException()
+
             self.cursor.execute("""
             select (quantity*Price) as SubTotal from products p
             inner join OrderDetails o
@@ -13,7 +22,7 @@ class OrderDetailsService(DBConnection,IOrderDetailsService):
             orders = self.cursor.fetchall()  # Get all data
             for order in orders:
                 print(order)  
-        except Exception as e:
+        except IncompleteOrderException as e:
             print(e)
         
     def GetOrderDetailInfo(self,OrderID):
@@ -33,6 +42,15 @@ class OrderDetailsService(DBConnection,IOrderDetailsService):
     def UpdateQuantity(self,OrderID,Quantity):
         try:
             self.cursor.execute("""
+            select QuantityInStock from Inventory
+            where ProductID=(select ProductID from OrderDetails
+                            where OrderID = ? )""",OrderID
+            )
+            stock_quantity=self.cursor.fetchone()[0]
+            if stock_quantity<Quantity:
+                raise InsufficientStockException()
+
+            self.cursor.execute("""
             update OrderDetails
             set Quantity=?
             where OrderID=?
@@ -46,7 +64,7 @@ class OrderDetailsService(DBConnection,IOrderDetailsService):
             )
             self.conn.commit()
             print("Quantity updated.........")
-        except Exception as e:
+        except InsufficientStockException as e:
             print(e)
 
 

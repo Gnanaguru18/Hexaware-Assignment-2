@@ -19,12 +19,11 @@ class InventoryService(DBConnection,IInventoryService):
         try:
             self.cursor.execute("""
             select QuantityInStock from Inventory
-            where ProductID= ? """,
+            where InventoryID= ? """,
             ProductID
             )
-            orders = self.cursor.fetchall()    
-            for order in orders:
-                print(order)
+            quantity = self.cursor.fetchone()[0]    
+            print(f"Quantity in stock:{quantity}")
         except Exception as e:
             print(e)
     

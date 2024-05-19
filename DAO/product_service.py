@@ -35,12 +35,11 @@ class ProductService(DBConnection,IProductService):
             where ProductID=?
             """,ProductID
             )
-            product = self.cursor.fetchall()
-            quantity=[i for i in product] 
-            if quantity[0] == 0:
+            product = self.cursor.fetchone()[0]
+            if product == 0:
                 print("Not available")
             else:
-                print("Available")
+                print(f"Available: Stock in quantity = {product}")
         except Exception as e:
             print(e)
 

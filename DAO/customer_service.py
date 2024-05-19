@@ -9,9 +9,8 @@ class CustomerService(DBConnection,ICustomerService):
             group by CustomerID""",
             (customer_id)
             )
-            products = self.cursor.fetchall()  
-            for product in products:
-                print(product)            
+            product = self.cursor.fetchone()[0]  
+            print(f"Total number of orders:{product}")            
         except Exception as e:
             print(e)
 
